@@ -47,7 +47,7 @@ public class MainFightScript : MonoBehaviour
     {
         grid.UpdateNodes(nodes);
         clearSelected();
-        List<PathfindingNode> inRange = grid.InRange(0, 0, 2);
+        List<PathfindingNode> inRange = grid.FindPath(0,0,4,4);
         for (int i = 0; i < inRange.Count; i++)
         {
             getNode(inRange[i].x, inRange[i].y).selected = true;

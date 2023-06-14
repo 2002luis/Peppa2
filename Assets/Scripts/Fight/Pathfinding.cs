@@ -59,6 +59,48 @@ public class Pathfinding : MonoBehaviour
         return ans;
     }
 
+    public List<PathfindingNode> FindPath(int startX, int startY, int endX, int endY)
+    {
+        this.ClearVisited();
+        Queue<PathfindingNode> q = new Queue<PathfindingNode>();
+        q.Enqueue(grid[startX, startY]);
+
+        PathfindingNode cur;
+        q.Peek().dist = 0;
+
+        while(q.TryPeek(out cur))
+        {
+            cur = q.Dequeue();
+
+            if (cur.x == endX && cur.y == endY) q.Clear();
+            cur.visited = true;
+
+            List<PathfindingNode> adj = this.getAdj(cur.x, cur.y);
+            for(int i = 0; i < adj.Count; i++)
+            {
+                if (!adj[i].visited && !adj[i].occupied)
+                {
+                    if (adj[i].dist > (cur.dist + 1))
+                    {
+                        adj[i].dist = cur.dist + 1;
+                        adj[i].prev = cur;
+                    }
+                    if (!q.Contains(adj[i])) q.Enqueue(adj[i]);
+                }
+            }
+        }
+
+        List<PathfindingNode> ans = new List<PathfindingNode>();
+        cur = grid[endX, endY];
+        while(cur != null)
+        {
+            ans.Add(cur);
+            cur = cur.prev;
+        }
+        ans.Reverse();
+        return ans;
+    }
+
     private void ClearVisited()
     {
         for (int x = 0; x < limX; x++) for (int y = 0; y < limY; y++)
