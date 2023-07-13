@@ -6,13 +6,15 @@ public class MainFightScript : MonoBehaviour
 {
     public Transform start0, startX, startY;
     public GameObject copy;
-    public int xSize, ySize;
+    public int xSize, ySize, curChar;
     public Vector3 xDist, yDist;
     public FightSquare[] nodes;
     public Pathfinding grid;
+    public List<FightCharacter> chars = new List<FightCharacter>();
     // Start is called before the first frame update
     void Start()
     {
+        curChar = 0;
         xDist = startX.position - start0.position;
         yDist = startY.position - start0.position;
         nodes = new FightSquare[xSize * ySize];
@@ -35,12 +37,14 @@ public class MainFightScript : MonoBehaviour
             }
         }
         grid.readGrid(nodes,xSize,ySize);
+        for (int i = 0; i < chars.Count; i++) chars[i].init(xSize, ySize, xDist, yDist, this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (curChar > chars.Count) curChar = 0;
+        chars[curChar].getMove();
     }
 
     public void Test()

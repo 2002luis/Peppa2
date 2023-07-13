@@ -456,10 +456,13 @@ MonoBehaviour:
   copy: {fileID: 0}
   xSize: 5
   ySize: 5
+  curChar: 0
   xDist: {x: 0, y: 0, z: 0}
   yDist: {x: 0, y: 0, z: 0}
   nodes: []
   grid: {fileID: 519420034}
+  chars:
+  - {fileID: 1450048318}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,10 +758,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1371992792}
-        m_TargetAssemblyTypeName: AbilitiesManager, Assembly-CSharp
-        m_MethodName: select
-        m_Mode: 3
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: FightCharacter, Assembly-CSharp
+        m_MethodName: testMove
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1048,7 +1051,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247035825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.81966674, y: -1.3753293, z: -9.941623}
+  m_LocalPosition: {x: 0.55, y: 3.52, z: -9.941623}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1201,13 +1204,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1450048317}
   - component: {fileID: 1450048316}
+  - component: {fileID: 1450048318}
   m_Layer: 0
   m_Name: PEPA R1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1450048316
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1268,13 +1272,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450048315}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.35, y: -1.5999999, z: 0}
+  m_LocalPosition: {x: -6.8103337, y: 2.9253292, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1450048318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450048315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b139ed99f7af04582d0cb177ef98da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moving: 0
+  testX: 0
+  testY: 0
 --- !u!1 &1527850705
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class FightSquare : MonoBehaviour
 {
     public int xPos, yPos;
-    public bool occupied;
-    public bool selected;
+    public bool occupied, selected, highlighted, wall;
     public new Transform transform;
     public SpriteRenderer sprite;
     // Start is called before the first frame update
@@ -21,8 +20,8 @@ public class FightSquare : MonoBehaviour
 
     public void Update()
     {
-        if (this.occupied) this.sprite.color = new Color(1, 0, 0);
-        else if (this.selected) this.sprite.color = new Color(0, 1, 0);
+        if (this.selected) this.sprite.color = new Color(0, 1, 0);
+        else if (this.occupied) this.sprite.color = new Color(1, 0, 0);
         else this.sprite.color = new Color(1, 1, 1);
     }
 }
