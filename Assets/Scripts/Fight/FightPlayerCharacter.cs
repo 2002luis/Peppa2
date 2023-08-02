@@ -6,9 +6,9 @@ public class FightPlayerCharacter : FightCharacter
 {
     public override void getMove()
     {
-        if (Input.GetKey("d")) this.move(1, 0);
-        else if (Input.GetKey("a")) this.move(-1, 0);
-        else if (Input.GetKey("s")) this.move(0, -1);
-        else if (Input.GetKey("w")) this.move(0, 1);
+        if (Input.GetKey("d")) this.oneMove(1, 0);
+        else if (Input.GetKey("a")) this.oneMove(-1, 0);
+        else if (Input.GetKey("s")) this.oneMove(0, -1);
+        else if (Input.GetKey("w")) this.oneMove(0, 1);
     }
 }

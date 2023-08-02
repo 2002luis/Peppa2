@@ -9,11 +9,13 @@ public class FightCharacter : MonoBehaviour
     protected SpriteRenderer spriteRend;
     protected new Transform transform;
     public MainFightScript mfs;
-    public bool moving;
+    public bool moving, cpu;
     public const float moveSpeed = 6f;
+    List<PathfindingNode> path;
 
     public void Start()
     {
+        cpu = false;
         moving = false;
         transform = this.GetComponent<Transform>();
         spriteRend = this.GetComponent<SpriteRenderer>();
@@ -29,11 +31,18 @@ public class FightCharacter : MonoBehaviour
         this.mfs = mfs;
     }
 
-    public void move(int xMod, int yMod)
+    public void move(int xDest, int yDest)
+    {
+        
+        if(xDest >= 0 && xDest < mfs.xSize && yDest >= 0 && yDest < mfs.ySize) path = mfs.grid.FindPath(curX, curY, xDest, yDest);
+        StartCoroutine(movePath());
+    }
+
+    public void oneMove(int xMod, int yMod)
     {
         if (!moving)
         {
-            if (xMod == 1 && xLimit > (curX + 1) && !mfs.getNode(1+curX,curY).occupied)
+            if (xMod == 1 && yMod == 0 && xLimit > (curX + 1) && !mfs.getNode(1 + curX, curY).occupied)
             {
                 mfs.getNode(curX, curY).occupied = false;
                 mfs.grid.grid[curX, curY].occupied = false; //isto é estúpido
@@ -41,7 +50,7 @@ public class FightCharacter : MonoBehaviour
                 nextPos += xDist;
                 StartCoroutine(moveLoop());
             }
-            else if (yMod == 1 && yLimit > (curY + 1) && !mfs.getNode(curX, curY + 1).occupied)
+            else if (yMod == 1 && xMod == 0 && yLimit > (curY + 1) && !mfs.getNode(curX, curY + 1).occupied)
             {
                 mfs.getNode(curX, curY).occupied = false;
                 mfs.grid.grid[curX, curY].occupied = false; //isto é estúpido
@@ -49,7 +58,7 @@ public class FightCharacter : MonoBehaviour
                 nextPos += yDist;
                 StartCoroutine(moveLoop());
             }
-            else if (xMod == -1 && (curX - 1) >= 0 && !mfs.getNode(curX - 1, curY).occupied)
+            else if (xMod == -1 && yMod == 0 && (curX - 1) >= 0 && !mfs.getNode(curX - 1, curY).occupied)
             {
                 mfs.getNode(curX, curY).occupied = false;
                 mfs.grid.grid[curX, curY].occupied = false; //isto é estúpido
@@ -57,7 +66,7 @@ public class FightCharacter : MonoBehaviour
                 nextPos -= xDist;
                 StartCoroutine(moveLoop());
             }
-            else if (yMod == -1 && (curY - 1) >= 0 && !mfs.getNode(curX, curY - 1).occupied)
+            else if (yMod == -1 && xMod == 0 && (curY - 1) >= 0 && !mfs.getNode(curX, curY - 1).occupied)
             {
                 mfs.getNode(curX, curY).occupied = false;
                 mfs.grid.grid[curX, curY].occupied = false; //isto é estúpido
@@ -89,8 +98,18 @@ public class FightCharacter : MonoBehaviour
         moving = false;
     }
 
+    IEnumerator movePath()
+    {
+        while (path.Count > 0) {
+            oneMove(path[0].x - curX, path[0].y - curY);
+            while (moving) yield return null;
+            path.RemoveAt(0);
+        }
+
+    }
+
     public virtual void getMove()
     {
-
+        // cpu shit
     }
 }

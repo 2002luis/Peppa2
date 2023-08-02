@@ -277,6 +277,8 @@ MonoBehaviour:
   yPos: 0
   occupied: 1
   selected: 0
+  highlighted: 0
+  wall: 0
   transform: {fileID: 362693444}
   sprite: {fileID: 0}
 --- !u!1 &483851588
@@ -758,7 +760,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1450048318}
         m_TargetAssemblyTypeName: FightCharacter, Assembly-CSharp
         m_MethodName: testMove
         m_Mode: 1
@@ -1291,6 +1293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b139ed99f7af04582d0cb177ef98da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mfs: {fileID: 0}
   moving: 0
   testX: 0
   testY: 0
@@ -1343,6 +1346,8 @@ MonoBehaviour:
   yPos: 0
   occupied: 0
   selected: 0
+  highlighted: 0
+  wall: 0
   transform: {fileID: 1527850706}
   sprite: {fileID: 0}
 --- !u!212 &1527850709
@@ -1726,6 +1731,8 @@ MonoBehaviour:
   yPos: 1
   occupied: 0
   selected: 0
+  highlighted: 0
+  wall: 0
   transform: {fileID: 1804390336}
   sprite: {fileID: 0}
 --- !u!1 &1915926536
