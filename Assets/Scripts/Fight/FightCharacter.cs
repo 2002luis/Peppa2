@@ -106,12 +106,16 @@ public class FightCharacter : MonoBehaviour
             while (moving) yield return null;
             if (path.Count != 0) path.RemoveAt(0);
         }
-        this.done = true;
     }
 
     public virtual void getMove()
     {
         // cpu shit
         move(testX, testY);
+    }
+
+    public virtual void getAttack()
+    {
+        this.done = true;
     }
 }

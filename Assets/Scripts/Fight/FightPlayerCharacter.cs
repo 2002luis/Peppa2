@@ -10,6 +10,10 @@ public class FightPlayerCharacter : FightCharacter
         else if (Input.GetKey("a")) this.oneMove(-1, 0);
         else if (Input.GetKey("s")) this.oneMove(0, -1);
         else if (Input.GetKey("w")) this.oneMove(0, 1);
-        else if (Input.GetKey("c") && !this.moving) this.done = true;
+    }
+
+    public override void getAttack()
+    {
+        if (Input.GetKey("c") && !this.moving) this.done = true;
     }
 }
