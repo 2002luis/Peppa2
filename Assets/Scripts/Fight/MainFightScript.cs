@@ -43,8 +43,14 @@ public class MainFightScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (curChar > chars.Count) curChar = 0;
+        if (curChar >= chars.Count) curChar = 0;
         chars[curChar].getMove();
+        if (chars[curChar].done)
+        {
+            chars[curChar].done = false;
+            curChar++;
+            ResetGrid();
+        }
     }
 
     public void Test()
@@ -55,6 +61,14 @@ public class MainFightScript : MonoBehaviour
         for (int i = 0; i < inRange.Count; i++)
         {
             getNode(inRange[i].x, inRange[i].y).selected = true;
+        }
+    }
+
+    public void ResetGrid()
+    {
+        for(int i = 0; i < nodes.Length; i++)
+        {
+            nodes[i].ResetColour();
         }
     }
 
