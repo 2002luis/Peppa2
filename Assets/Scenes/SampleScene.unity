@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curX: 0
   curY: 0
-  moveRange: 2
+  moveRange: 4
   rangeMod: 1
   mfs: {fileID: 0}
   moving: 0
