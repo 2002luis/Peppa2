@@ -44,8 +44,7 @@ public class MainFightScript : MonoBehaviour
     void Update()
     {
         if (curChar >= chars.Count) curChar = 0;
-        chars[curChar].getMove();
-        if (!chars[curChar].moving) chars[curChar].getAttack();
+        if(!chars[curChar].moving) chars[curChar].getMove();
         if (chars[curChar].done)
         {
             chars[curChar].done = false;

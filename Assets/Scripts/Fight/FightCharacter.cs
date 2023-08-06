@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FightCharacter : MonoBehaviour
 {
-    public int curX, curY;
+    public int curX, curY, moveRange = 3;
+    public float rangeMod = 1;
     protected int xLimit, yLimit;
     protected Vector3 nextPos, xDist, yDist;
     protected SpriteRenderer spriteRend;
@@ -12,7 +13,9 @@ public class FightCharacter : MonoBehaviour
     public MainFightScript mfs;
     public bool moving, cpu, done;
     public const float moveSpeed = 6f;
-    List<PathfindingNode> path;
+    protected List<PathfindingNode> path;
+    protected List<FightSquare> canMove = new List<FightSquare>(), canAttack = new List<FightSquare>();
+    public bool attacking;
 
     public void Start()
     {
@@ -33,7 +36,7 @@ public class FightCharacter : MonoBehaviour
         this.mfs = mfs;
     }
 
-    public void move(int xDest, int yDest)
+    public virtual void move(int xDest, int yDest)
     {
         if(xDest >= 0 && xDest < mfs.xSize && yDest >= 0 && yDest < mfs.ySize) path = mfs.grid.FindPath(curX, curY, xDest, yDest);
         StartCoroutine(movePath());
@@ -85,7 +88,7 @@ public class FightCharacter : MonoBehaviour
         move(testX, testY);
     }
 
-    IEnumerator moveLoop()
+    public IEnumerator moveLoop()
     {
         
         moving = true;
@@ -99,13 +102,25 @@ public class FightCharacter : MonoBehaviour
         moving = false;
     }
 
-    IEnumerator movePath()
+    public IEnumerator movePath()
     {
         while (path.Count > 0) {
             oneMove(path[0].x - curX, path[0].y - curY);
             while (moving) yield return null;
             if (path.Count != 0) path.RemoveAt(0);
         }
+    }
+
+    public IEnumerator attackGeneric(float timer)
+    {
+        attacking = true;
+        while (timer >= 0)
+        {
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        attacking = false;
+        done = true;
     }
 
     public virtual void getMove()
